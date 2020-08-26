@@ -1,0 +1,41 @@
+##Hadoop Mapreduce is a framework to solve bigdata problems
+
+###Logic in MapReduce
+
+1. wordcount={}
+2. for word in file.read().split():
+3. if word not in wordcount:
+4. wordcount[word] = 0
+5. wordcount[word] += 1
+6. for k,v in wordcount.items():
+7. print k, v
+
+####If you have the plain text file of all the Lord Of Rings books, how
+would you find the frequencies of words?
+Approach 3 (Unix):
+• Replace space with a newline
+• Order lines with a sort command
+• Then find frequencies using uniq
+• Scans from top to bottom
+• prints the count when line value changes
+cat myfile| sed -E 's/[\t ]+/\n/g'| sort -S 1g | uniq -c
+
+##Mapper/Reducer for word frequency problem.
+function mapper(line):
+foreach(word in line) :
+print(word, 1);
+
+Mapper/Reducer for computing max temp
+def mapper():
+(t, c, time) = line.split(",")
+print(c, t)
+def reduce(key, values):
+return max(values)
+
+***By default there is a single reducer job  in case of streaming job,but it
+can be split by specifying cmd option :
+mapred.reduce.tasks. ****
+
+Remove old output directory
+hadoop fs -rm -r /user/student/wordcount/output
+
